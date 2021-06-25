@@ -1,17 +1,54 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reactDOM from 'react-dom';
+import styled from 'styled-components';
+import Signin from './Signin'
+import Signup from './Signup';
+import Home from './Home';
+import './Styles/reset.css'
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import NewEntry from './NewEntry';
+import NewOut from './NewOut';
+import UserContext from './contexts/UserContext';
+import { useState } from 'react';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function App() {
+    const[userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem("userInfo")));
+    return (
+        <UserContext.Provider value={{userInfo, setUserInfo}}>
+        <BrowserRouter>
+            <Switch>
+                <Background>
+                    <Route path="/" exact>
+                        <Signin />
+                    </Route>
+                    <Route path="/signup" exact>
+                        <Signup />
+                    </Route>
+                    <Route path="/home" exact>
+                        <Home/>
+                    </Route>
+                    <Route path="/newentry">
+                        <NewEntry/>
+                    </Route>
+                    <Route path="/newout">
+                        <NewOut/>
+                    </Route>
+                </Background>
+            </Switch>
+        </BrowserRouter>
+        </UserContext.Provider>
+    )
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+
+
+const Background = styled.div`
+    width: 100vw;
+    height: 100vh;
+    background-color: #8C11BE;
+    margin:0;
+    
+    
+`
+
+reactDOM.render(<App />, document.getElementById("root"));
