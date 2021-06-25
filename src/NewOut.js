@@ -26,8 +26,8 @@ export default function NewOut(){
         <Container>
             <h1>Nova saída</h1>
             <form onSubmit={entry}>
-                <input type='number' placeholder='Valor' onChange={e => setValue(e.target.value)}></input>
-                <input type='text' placeholder='Descrição' onChange={e => setDescription(e.target.value)}></input>
+                <input required type='number' placeholder='Valor' onChange={e => setValue(e.target.value)}></input>
+                <input required type='text' placeholder='Descrição' onChange={e => setDescription(e.target.value)}></input>
                 <button type='submit'>Salvar saída</button>
                 <Link to='/home'><button>Cancelar</button></Link>
             </form>

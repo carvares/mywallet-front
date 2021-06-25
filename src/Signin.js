@@ -1,21 +1,26 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import styled from "styled-components";
 import { Link ,useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "./contexts/UserContext";
+import Loader from "./Loader";
 
 export default function Signin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [waiting, setWaiting] = useState(false);
     const history = useHistory();
     const {userInfo,setUserInfo} = useContext(UserContext);
     localStorage.setItem('userInfo', JSON.stringify(userInfo))
     const persistLogin = JSON.parse(localStorage.getItem('userInfo'))
     
-    if(persistLogin){
+    useEffect(()=>{if(persistLogin){
+        setWaiting(true)
+        console.log("entrou")
         const promisse = axios.post('http://localhost:4000/login',{email:persistLogin.email, token:persistLogin.token})
-        promisse.then((r)=>{setUserInfo(r.data);history.push("/home")})
-    }
+        promisse.then((r)=>{setUserInfo(r.data);history.push("/home");setWaiting(false)})
+    }},[] )
+    
     function login(e) {
         e.preventDefault()
         const promisse = axios.post('http://localhost:4000/login',{email, password,})
@@ -23,10 +28,11 @@ export default function Signin() {
     }
     return (
         <Login>
+            {waiting? <Loader/>:null}
             <h1>MyWallet</h1>
             <form onSubmit={login}>
-                <input type="email" placeholder="E-mail" onChange={e => setEmail(e.target.value)}></input>
-                <input type="password" placeholder="Senha" onChange={e => setPassword(e.target.value)}></input>
+                <input required type="email" placeholder="E-mail" onChange={e => setEmail(e.target.value)}></input>
+                <input required type="password" placeholder="Senha" onChange={e => setPassword(e.target.value)}></input>
                 <button type="submit">Entrar</button>
             </form>
             <Link to="/signup"><p>Primeira vez? Cadastre-se!</p></Link>

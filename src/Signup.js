@@ -22,10 +22,10 @@ export default function Signup() {
         <Registry>
             <h1>MyWallet</h1>
             <form onSubmit={registry}>
-                <input type="text" placeholder="Nome" onChange={e => setName(e.target.value)}></input>
-                <input type="email" placeholder="E-mail" onChange={e => setEmail(e.target.value)}></input>
-                <input type="password" placeholder="Senha" onChange={e => setPassword(e.target.value)}></input>
-                <input type="password" placeholder="Confirme a senha" onChange={e => setConfirmPassword(e.target.value)}></input>
+                <input required type="text" placeholder="Nome" onChange={e => setName(e.target.value)}></input>
+                <input  required type="email" placeholder="E-mail" onChange={e => setEmail(e.target.value)}></input>
+                <input required type="password" placeholder="Senha" onChange={e => setPassword(e.target.value)}></input>
+                <input required type="password" placeholder="Confirme a senha" onChange={e => setConfirmPassword(e.target.value)}></input>
                 <button type="submit">Entrar</button>
             </form>
             <Link to="/"><p>Já tem uma conta? Entre agora!</p></Link>

@@ -19,7 +19,7 @@ export default function Transactions() {
     },[])
     
     console.log(valueList)
-    if (valueList.length === 0) {
+    if (valueList[0] === undefined || valueList[0].length === 0) {
         return (
             <Text>Não há registros de entrada ou saída</Text>
         )
@@ -64,15 +64,20 @@ const Text = styled.p`
     margin: 0 auto 0 auto;
     padding: 30vh 0 0 0;
 `
-const List = styled.ul`
+const List = styled.div`
     margin: 0 auto 0 auto;
     padding: 10px 0 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 446px;
+    min-height:446px;
+
+    overflow-y: scroll;
+
     li{
         width: 80vw;
-        height: 30px;
+        margin: 4px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
