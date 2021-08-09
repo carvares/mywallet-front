@@ -16,7 +16,6 @@ export default function Signin() {
     
     useEffect(()=>{if(persistLogin){
         setWaiting(true)
-        console.log("entrou")
         const promisse = axios.post('http://localhost:4000/login',{email:persistLogin.email, token:persistLogin.token})
         promisse.then((r)=>{setUserInfo(r.data);history.push("/home");setWaiting(false)})
     }},[] )

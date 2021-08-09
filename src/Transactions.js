@@ -7,7 +7,6 @@ import ValueRender from "./ValueRender";
 export default function Transactions() {
     const [valueList, setValueList] = useState([]);
     const {userInfo} = useContext(UserContext)
-    console.log({...userInfo})
     const config = {
         headers: {
             "Authorization": `Bearer ${userInfo.token}`
@@ -15,10 +14,9 @@ export default function Transactions() {
     }
     useEffect(()=>{
         const promisse = axios.get('http://localhost:4000/transactions', config)
-        promisse.then(r => { setValueList(r.data); console.log(r.data)})
+        promisse.then(r =>  setValueList(r.data))
     },[])
     
-    console.log(valueList)
     if (valueList[0] === undefined || valueList[0].length === 0) {
         return (
             <Text>Não há registros de entrada ou saída</Text>
@@ -29,8 +27,8 @@ export default function Transactions() {
         <List>
             {valueList[0].map((i) => {
                 return (
-                    <li>
-                        <p1>{i.date}</p1>
+                    <li key = {i.id}>
+                        <p>{i.date}</p>
                         <h2>{i.description}</h2>
                         <ValueRender typeTransaction={i.typeTransaction} value={i.value} />
                     </li>
@@ -38,7 +36,7 @@ export default function Transactions() {
             }).reverse()}
         </List>
         <Balance value = {valueList[1]}>
-            <p2>SALDO</p2>
+            <p>SALDO</p>
             <span>{(valueList[1]/100).toLocaleString("pt-BR", {style: 'currency', currency: 'BRL' })}</span>
         </Balance>
         </Container>
@@ -83,7 +81,7 @@ const List = styled.div`
         align-items: center;
         font-size: 16px;
         font-weight: 400;
-        p1{
+        p{
         
         color:#c6c6c6;
 
@@ -102,7 +100,7 @@ const Balance = styled.div`
     margin: 0 0 10px 0;
     display: flex;
     justify-content: space-between;
-    p2{
+    p{
         font-weight: 700;
         color: #000;
        
