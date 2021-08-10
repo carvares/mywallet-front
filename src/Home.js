@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Transactions from './Transactions';
 import { useContext } from 'react';
 import UserContext from './contexts/UserContext';
-
+console.log(process.env.REACT_APP_API_BASE_URL)
 export default function Home() {
     const { userInfo, setUserInfo } = useContext(UserContext);
     const history = useHistory();

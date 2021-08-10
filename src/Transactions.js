@@ -13,7 +13,7 @@ export default function Transactions() {
         }
     }
     useEffect(()=>{
-        const promisse = axios.get('http://localhost:4000/transactions', config)
+        const promisse = axios.get(`${process.env.REACT_APP_API_BASE_URL}/transactions`, config)
         promisse.then(r =>  setValueList(r.data))
     },[])
     

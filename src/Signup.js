@@ -12,7 +12,7 @@ export default function Signup() {
     function registry(e) {
         e.preventDefault()
         if(password === confirmPassword){
-        const promisse = axios.post('http://localhost:4000/registry', {"name":name, "email":email, "password": password})
+        const promisse = axios.post(`${process.env.REACT_APP_API_BASE_URL}/registry`, {"name":name, "email":email, "password": password})
         promisse.then(()=>history.push("/"))
         } else{
             alert("As senhas informadas não são iguais")

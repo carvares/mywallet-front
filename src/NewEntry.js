@@ -18,7 +18,7 @@ export default function NewEntry(){
 
     function entry(e){
         e.preventDefault();
-        const promisse = axios.post(`http://localhost:4000/transactions`,{value,description, typeTransaction:"in"},config)
+        const promisse = axios.post(`${process.env.REACT_APP_API_BASE_URL}/transactions`,{value,description, typeTransaction:"in"},config)
         promisse.then(()=>history.push('/home'))
     }
 

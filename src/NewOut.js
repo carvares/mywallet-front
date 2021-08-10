@@ -18,7 +18,7 @@ export default function NewOut(){
 
     function entry(e){
         e.preventDefault();
-        const promisse = axios.post(`http://localhost:4000/transactions`,{value,description, typeTransaction:"out"},config)
+        const promisse = axios.post(`${process.env.REACT_APP_API_BASE_URL}/transactions`,{value,description, typeTransaction:"out"},config)
         promisse.then(()=>history.push('/home'))
     }
 
