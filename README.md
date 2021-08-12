@@ -10,7 +10,7 @@ This is an web application with which lots of people can manage their own expens
 
 By using this app any user can learn how they've been using their money and always keep track of your balance.
 
-Try it now: https://mywallet-front.vercel.app/
+Try it out now at https://mywallet-front.vercel.app/
 
 ## Technologies
 The following tools and frameworks were used in the construction of the project:<br>
